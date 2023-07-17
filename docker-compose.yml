@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    image: bassel-math-web
     build:
       context: .
       dockerfile: Dockerfile
@@ -8,3 +9,8 @@ services:
       - 5000:5000
     environment:
       - NAME=World
+    labels:
+      - traefik.http.routers.bassel.rule=Host(`www.bassel.lol`)
+      - traefik.http.routers.bassel.entrypoints=http
+      - traefik.http.services.bassel.loadbalancer.server.port=5000
+
