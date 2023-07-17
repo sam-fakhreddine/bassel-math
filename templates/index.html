@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Math Quiz</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <button id="start">Start Quiz</button>
+    <div id="quiz"></div>
+    <button id="submit" style="display: none;">Submit Answers</button>
+
+    <script>
+        $("#start").click(function() {
+            $.get("/start", function(data) {
+                sessionStorage.setItem("session_id", data.session_id);
+                $("#quiz").empty();
+                var table = $('<table></table>');
+                var counter = 0;
+                for (let i = 0; i < 3; i++) {
+                    var row = $('<tr></tr>');
+                    for (let j = 0; j < 4; j++) {
+                        var cell = $('<td></td>');
+                        var card = $('<div class="card">' + data.problems[counter] + '</div>');
+                        var input = $('<input type="number" id="answer' + counter + '">');
+                        cell.append(card, input);
+                        row.append(cell);
+                        counter++;
+                    }
+                    table.append(row);
+                }
+                $("#quiz").append(table);
+                $("#start").hide();
+                $("#submit").show();
+            });
+        });
+
+        $("#submit").click(function() {
+            let answers = [];
+            for (let i = 0; i < counter; i++) {
+                answers.push(parseInt($("#answer" + i).val()));
+            }
+            $.ajax({
+                url: '/submit',
+                type: 'POST',
+                contentType: 'application/json',  // Set the Content-Type
+                data: JSON.stringify({session_id: sessionStorage.getItem("session_id"), answers: answers}),  // Convert data to JSON
+                success: function(data) {
+                    alert("Your score is: " + data.score);
+                    $("#submit").hide();
+                    $("#start").show();
+                },
+                error: function(xhr, status, error) {
+                    console.log("Failed to submit answers:", status, error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

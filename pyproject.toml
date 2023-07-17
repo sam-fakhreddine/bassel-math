@@ -1,0 +1,19 @@
+[build-system]
+requires = ["flask", "setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.poetry]
+name = "math-quiz"
+version = "0.1.0"
+description = "A webapp that generates math problems for students in grades 1-6"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+flask = "^1.1.2"
+jsonify = "^0.5"
+markupsafe = "2.0.1"
+gunicorn = "^21.0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
