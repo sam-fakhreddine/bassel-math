@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 9443:5000
+      - 7443:5000
     environment:
       - NAME=World
     labels:
