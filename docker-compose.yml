@@ -13,4 +13,6 @@ services:
       - traefik.http.routers.bassel.rule=Host(`www.bassel.lol`)
       - traefik.http.routers.bassel.entrypoints=http
       - traefik.http.services.bassel.loadbalancer.server.port=5000
-
+    volumes:
+      - ./certs:/certs
+    command: sh -c "openssl req -newkey rsa:2048 -nodes -keyout /certs/key.pem -x509 -days 365 -out /certs/cert.pem -subj '/CN=www.bassel.lol'"
