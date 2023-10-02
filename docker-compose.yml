@@ -5,11 +5,23 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 7443:5000
+    networks:
+      - traefik-a_traefik-public
     environment:
       - NAME=World
     labels:
-      - traefik.http.routers.bassel.rule=Host(`www.bassel.lol`)
-      - traefik.http.routers.bassel.entrypoints=http
-      - traefik.http.services.bassel.loadbalancer.server.port=5000
+      - "traefik.enable=true"
+      - "traefik.http.routers.bassel.rule=Host(`www.bassel.lol`)"
+      - "traefik.http.routers.bassel.entrypoints=web"
+      - "traefik.http.services.bassel.loadbalancer.server.port=5000"
+      # Redirection middleware
+      - "traefik.http.middlewares.redirect-regex.redirectregex.regex=^http://(?:www\\.)?bassel\\.lol/(.*)"
+      - "traefik.http.middlewares.redirect-regex.redirectregex.replacement=http://www.bassel.lol/$${1}"
+      # Router for redirection
+      - "traefik.http.routers.redirect.rule=Host(`bassel.lol`)"
+      - "traefik.http.routers.redirect.entrypoints=web"
+      - "traefik.http.routers.redirect.middlewares=redirect-regex"
+
+networks:
+  traefik-a_traefik-public:
+    external: true
