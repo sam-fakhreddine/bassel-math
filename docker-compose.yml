@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: bassel-math-web
+    image: bassel-math-app:latest
     build:
       context: .
       dockerfile: Dockerfile
