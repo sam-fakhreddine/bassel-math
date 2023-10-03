@@ -11,7 +11,7 @@ services:
       - NAME=World
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.bassel.rule=Host(`www.bassel.lol`)"
+      - "traefik.http.routers.bassel.rule=Host(`bassel.lol`)"
       - "traefik.http.routers.bassel.entrypoints=web"
       - "traefik.http.services.bassel.loadbalancer.server.port=5000"
       # Redirection middleware
