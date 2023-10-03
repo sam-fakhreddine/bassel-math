@@ -1,16 +1,11 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Set the working directory in the container to /app
 WORKDIR /app
 
 # Add the current directory contents into the container at /app
 ADD . /app
-# Install openssl
-RUN apt-get update && apt-get install -y openssl
-
-# Generate a self-signed certificate
-RUN openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes -subj '/CN=www.bassel.lol'
 
 # Install dependencies from requirements.txt
 RUN pip install -r requirements.txt
