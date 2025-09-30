@@ -74,22 +74,23 @@ dotenv = ["python-dotenv"]
 
 [[package]]
 name = "gunicorn"
-version = "21.0.0"
+version = "22.0.0"
 description = "WSGI HTTP Server for UNIX"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.7"
 files = [
-    {file = "gunicorn-21.0.0-py3-none-any.whl", hash = "sha256:f3a52f282306059b3a39761559c086d326449a2d67eb8ab224f057caa7cd1cff"},
-    {file = "gunicorn-21.0.0.tar.gz", hash = "sha256:d01d18d61ba58fa1e3a1ae4f15c77989a95478edbaaf95f3e3ff92a2b69d1ff2"},
+    {file = "gunicorn-22.0.0-py3-none-any.whl", hash = "sha256:350679f91b24062c86e386e198a15438d53a7a8207235a78ba1b53df4c4378d9"},
+    {file = "gunicorn-22.0.0.tar.gz", hash = "sha256:4a0b436239ff76fb33f11c07a16482c521a7e09c1ce3cc293c2330afe01bec63"},
 ]
 
 [package.dependencies]
 packaging = "*"
 
 [package.extras]
-eventlet = ["eventlet (>=0.24.1)"]
+eventlet = ["eventlet (>=0.24.1,!=0.36.0)"]
 gevent = ["gevent (>=1.4.0)"]
 setproctitle = ["setproctitle"]
+testing = ["coverage", "eventlet", "gevent", "pytest", "pytest-cov"]
 tornado = ["tornado (>=0.2)"]
 
 [[package]]
@@ -309,4 +310,4 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "3f5a1730a6613bfd07dadeeadf42db8a99a82c5c0b830d244ef5e974bc39871c"
+content-hash = "7370f51fcd0e23667d7a2ee8b891e9f04096a652b350ad330a1eb5df6b661ca6"
