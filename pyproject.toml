@@ -10,7 +10,7 @@ authors = ["Your Name <your.email@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-flask = "^1.1.2"
+flask = "^3.0.0"
 jsonify = "^0.5"
 markupsafe = "2.0.1"
 gunicorn = "^21.0.0"
